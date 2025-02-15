@@ -25,4 +25,5 @@
 
 1. Клонируйте репозиторий:
    ```bash
-   git clone https://github.com/yourusername/rick-and-morty-android.git
+   git clone https://github.com/vtinchurin/RickAndMortyExplorer.git
+   
