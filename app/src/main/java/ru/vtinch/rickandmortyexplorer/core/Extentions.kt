@@ -29,9 +29,7 @@ fun String.ToGenderIcon(modifier: Modifier = Modifier) {
         else -> R.drawable.ic_unknown
     }
     Image(
-        painter = painterResource(resId),
-        contentDescription = "",
-        modifier = modifier
+        painter = painterResource(resId), contentDescription = "", modifier = modifier
     )
 }
 

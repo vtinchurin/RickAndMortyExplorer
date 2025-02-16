@@ -11,17 +11,16 @@ data class CharacterDetail(
     private val episodes: List<Pair<String, String>>
 ) {
 
-    fun <T : Any> map(mapper: Mapper<T>): T =
-        mapper.map(
-            id = id,
-            name = name,
-            imageUrl = imageUrl,
-            status = status,
-            location = location,
-            species = species,
-            gender = gender,
-            episodes = episodes
-        )
+    fun <T : Any> map(mapper: Mapper<T>): T = mapper.map(
+        id = id,
+        name = name,
+        imageUrl = imageUrl,
+        status = status,
+        location = location,
+        species = species,
+        gender = gender,
+        episodes = episodes
+    )
 
     interface Mapper<T : Any> {
         fun map(

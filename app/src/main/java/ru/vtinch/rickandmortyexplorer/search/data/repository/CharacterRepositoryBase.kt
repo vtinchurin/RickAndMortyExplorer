@@ -12,7 +12,7 @@ import ru.vtinch.rickandmortyexplorer.search.domain.repository.CharacterReposito
 
 class CharacterRepositoryBase(
     private val cloudDataSource: CloudDataSource,
-    private val handleError :HandleError<Exception, DomainException>,
+    private val handleError: HandleError<DomainException>,
 ) : CharacterRepository {
 
     private var currentCharacter: CharacterDetail? = null
@@ -41,6 +41,5 @@ class CharacterRepositoryBase(
     }
 
     override fun characterDetail(): CharacterDetail = currentCharacter!!
-
 
 }

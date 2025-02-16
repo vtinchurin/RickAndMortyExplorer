@@ -21,8 +21,7 @@ interface DetailScreenState {
         animatedVisibilityScope: AnimatedVisibilityScope
     )
 
-    fun update(content: CharacterDetailUi) =
-        Content(content)
+    fun update(content: CharacterDetailUi) = Content(content)
 
     data class Content(private val content: CharacterDetailUi) : DetailScreenState {
         @Composable

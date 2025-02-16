@@ -11,22 +11,24 @@ import ru.vtinch.rickandmortyexplorer.search.presentation.SearchViewModel
 class Core : ProvideViewModel {
 
     val cloudModule = CloudModule.Base(API_URL)
-    private val service =cloudModule.service()
+    private val service = cloudModule.service()
     private val cloudDataSource = CloudDataSource.Base(service)
     private val repositoryBase = CharacterRepositoryBase(
-        cloudDataSource,
-        handleError = HandleError.OnData()
+        cloudDataSource, handleError = HandleError.OnData()
     )
 
     private val searchViewModel by lazy {
         SearchViewModel(
-            characterRepository = repositoryBase, mapper = CharacterMapper(),
+            characterRepository = repositoryBase,
+            mapper = CharacterMapper(),
             handleError = HandleError.OnSearchScreen()
         )
     }
     private val characterDetailViewModel
-        get() =
-            CharacterDetailViewModel(repository = repositoryBase, mapper = CharacterDetailMapper())
+        get() = CharacterDetailViewModel(
+            repository = repositoryBase,
+            mapper = CharacterDetailMapper()
+        )
 
 
     override fun <T : MyViewModel> viewModel(clazz: Class<T>): T {
@@ -37,7 +39,7 @@ class Core : ProvideViewModel {
         } as T
     }
 
-    companion object{
+    companion object {
         private const val API_URL = "https://rickandmortyapi.com/api/"
     }
 }

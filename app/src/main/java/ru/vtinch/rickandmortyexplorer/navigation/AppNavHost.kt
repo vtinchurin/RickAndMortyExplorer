@@ -36,7 +36,8 @@ fun AppNavHost(
                     modifier = modifier,
                     navController = navController,
                     shareTransitionScope = this@SharedTransitionLayout,
-                    animatedVisibilityScope = this,)
+                    animatedVisibilityScope = this,
+                )
             }
         }
     }

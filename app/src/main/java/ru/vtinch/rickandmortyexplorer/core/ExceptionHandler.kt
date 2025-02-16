@@ -3,11 +3,11 @@ package ru.vtinch.rickandmortyexplorer.core
 import okio.IOException
 import ru.vtinch.rickandmortyexplorer.search.presentation.SearchScreenState
 
-interface HandleError<In : Throwable,O: Any> {
+interface HandleError<O : Any> {
 
-    fun handleError(e: In): O
+    fun handleError(e: Exception): O
 
-    class OnData : HandleError<Exception, DomainException> {
+    class OnData : HandleError<DomainException> {
         override fun handleError(e: Exception): DomainException {
             throw if (e is IOException) DomainException.NoInternetConnection()
             else DomainException.ServiceUnavailable()
@@ -15,14 +15,14 @@ interface HandleError<In : Throwable,O: Any> {
         }
     }
 
-    class OnSearchScreen : HandleError<DomainException, SearchScreenState> {
-        override fun handleError(e: DomainException): SearchScreenState {
+    class OnSearchScreen : HandleError<SearchScreenState> {
+        override fun handleError(e: Exception): SearchScreenState {
             return SearchScreenState.Error(e.message ?: "Service unavailable")
         }
     }
 }
 
-sealed class DomainException:Throwable() {
+sealed class DomainException : Exception() {
 
     data class NoInternetConnection(override val message: String = "No internet connection") :
         DomainException()

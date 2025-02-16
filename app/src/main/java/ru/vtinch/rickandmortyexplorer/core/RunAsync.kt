@@ -10,9 +10,7 @@ import kotlinx.coroutines.withContext
 interface RunAsync {
 
     fun <T : Any> handleAsync(
-        scope: CoroutineScope,
-        heavyOperation: suspend () -> T,
-        uiOperation: (T) -> Unit
+        scope: CoroutineScope, heavyOperation: suspend () -> T, uiOperation: (T) -> Unit
     )
 
     abstract class Abstract(
@@ -22,9 +20,7 @@ interface RunAsync {
         private var job: Job = Job()
 
         override fun <T : Any> handleAsync(
-            scope: CoroutineScope,
-            heavyOperation: suspend () -> T,
-            uiOperation: (T) -> Unit
+            scope: CoroutineScope, heavyOperation: suspend () -> T, uiOperation: (T) -> Unit
         ) {
             job.cancel()
             job = scope.launch(Dispatchers.IO) {

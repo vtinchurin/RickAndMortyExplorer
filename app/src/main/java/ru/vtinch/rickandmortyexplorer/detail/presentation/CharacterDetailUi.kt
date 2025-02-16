@@ -52,7 +52,7 @@ data class CharacterDetailUi(
     private val species: String,
     private val gender: String,
     private val location: String,
-    private val episodes: List<Episode>//todo
+    private val episodes: List<Episode>
 ) {
     @ExperimentalSharedTransitionApi
     @OptIn(ExperimentalFoundationApi::class)
@@ -151,13 +151,15 @@ data class CharacterDetailUi(
                                 .fillMaxWidth()
                                 .background(MaterialTheme.colorScheme.background),
                         ) {
-                            Text(
-                                text = "Episodes",
-                                style = MaterialTheme.typography.headlineMedium,
-                                modifier = Modifier.padding(8.dp)
-                            )
+                            Column {
+                                Text(
+                                    text = "Episodes",
+                                    style = MaterialTheme.typography.headlineMedium,
+                                    modifier = Modifier.padding(8.dp)
+                                )
+                                HorizontalDivider(Modifier)
+                            }
                         }
-                        Spacer(Modifier.height(4.dp))
                     }
                     items(episodes.size) {
                         Spacer(Modifier.height(8.dp))
@@ -180,10 +182,16 @@ private fun PairInfo(
 ) {
     Row(modifier, verticalAlignment = Alignment.CenterVertically) {
         Text(
-            text = "$title : ", modifier = modifier, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Medium
+            text = "$title : ",
+            modifier = modifier,
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Medium
         )
         Text(
-            text = value, modifier = modifier, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Light
+            text = value,
+            modifier = modifier,
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Light
         )
     }
 }

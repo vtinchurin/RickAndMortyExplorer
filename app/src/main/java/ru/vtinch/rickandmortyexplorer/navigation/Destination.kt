@@ -65,20 +65,19 @@ object SearchScreen : Route {
             SearchView(textState) {
                 viewModel.search(it.text)
             }
-            viewModel.innerState.Render(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(8.dp),
+            viewModel.innerState.Render(modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp),
                 shareTransitionScope = shareTransitionScope,
                 animatedVisibilityScope = animatedVisibilityScope,
                 onNavigate = { id ->
                     viewModel.getDetail(id) {
                         navController.navigate(DetailScreen(id))
                     }
-                }, onRetry = {
+                },
+                onRetry = {
                     viewModel.search(textState.value.text)
-                }
-            )
+                })
         }
     }
 }

@@ -6,6 +6,7 @@ import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,7 +22,6 @@ import ru.vtinch.rickandmortyexplorer.shared_ui.CharacterImage
 import ru.vtinch.rickandmortyexplorer.shared_ui.Status
 
 
-@OptIn(ExperimentalSharedTransitionApi::class)
 data class CharacterUi(
     private val id: Int,
     private val name: String,
@@ -29,6 +29,8 @@ data class CharacterUi(
     private val species: String,
     private val imageUrl: String,
 ) : SearchRender<CharacterUi> {
+
+    @OptIn(ExperimentalSharedTransitionApi::class)
     @Composable
     override fun Render(
         modifier: Modifier,
@@ -45,29 +47,43 @@ data class CharacterUi(
                 onClick = { onNavigate.invoke(id) }) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
 
-                    CharacterImage(imageUrl, Modifier.size(128.dp).sharedElement(
-                        state = rememberSharedContentState(key = "image/$imageUrl"),
-                        animatedVisibilityScope = animatedVisibilityScope
-                    ))
+                    CharacterImage(
+                        imageUrl,
+                        Modifier
+                            .size(128.dp)
+                            .sharedElement(
+                                state = rememberSharedContentState(key = "image/$imageUrl"),
+                                animatedVisibilityScope = animatedVisibilityScope
+                            )
+                    )
 
                     Column(
                         modifier = modifier.padding(vertical = 8.dp, horizontal = 8.dp),
-                        verticalArrangement = Arrangement.SpaceAround
+                        verticalArrangement = Arrangement.Top
                     ) {
                         Text(
                             text = name,
                             fontWeight = FontWeight.Bold,
-                            modifier = modifier.weight(1f)
+                            modifier = Modifier.weight(1f)
                         )
-                        Text(
-                            text = "Status",
-                            fontStyle = FontStyle.Italic,
-                            fontWeight = FontWeight.Light,
-                            modifier = modifier
-                        )
-                        Row(modifier.weight(1f), verticalAlignment = Alignment.CenterVertically) {
-                            Status(status, Modifier)
-                            Text(text = "$status - $species")
+                        Column(
+                            Modifier
+                                .fillMaxWidth()
+                                .weight(1f)
+                        ) {
+                            Text(
+                                text = "Status",
+                                fontStyle = FontStyle.Italic,
+                                fontWeight = FontWeight.Light,
+                                modifier = modifier
+                            )
+                            Row(
+                                modifier.weight(1f),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Status(status, Modifier)
+                                Text(text = "$status - $species")
+                            }
                         }
                     }
                 }
@@ -75,5 +91,3 @@ data class CharacterUi(
         }
     }
 }
-
-
