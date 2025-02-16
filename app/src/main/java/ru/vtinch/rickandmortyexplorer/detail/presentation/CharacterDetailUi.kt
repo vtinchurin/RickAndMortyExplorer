@@ -151,13 +151,15 @@ data class CharacterDetailUi(
                                 .fillMaxWidth()
                                 .background(MaterialTheme.colorScheme.background),
                         ) {
-                            Text(
-                                text = "Episodes",
-                                style = MaterialTheme.typography.headlineMedium,
-                                modifier = Modifier.padding(8.dp)
-                            )
+                            Column {
+                                Text(
+                                    text = "Episodes",
+                                    style = MaterialTheme.typography.headlineMedium,
+                                    modifier = Modifier.padding(8.dp)
+                                )
+                                HorizontalDivider(Modifier)
+                            }
                         }
-                        Spacer(Modifier.height(4.dp))
                     }
                     items(episodes.size) {
                         Spacer(Modifier.height(8.dp))
