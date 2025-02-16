@@ -6,14 +6,16 @@ import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 
-@ExperimentalSharedTransitionApi
+
 interface SearchRender<T> {
+
+    @ExperimentalSharedTransitionApi
     @Composable
     fun Render(
         modifier: Modifier,
         shareTransitionScope: SharedTransitionScope,
         animatedVisibilityScope: AnimatedVisibilityScope,
         onNavigate: (Int) -> Unit,
-        onRetry: ()->Unit,
+        onRetry: () -> Unit,
     ) = Unit
 }

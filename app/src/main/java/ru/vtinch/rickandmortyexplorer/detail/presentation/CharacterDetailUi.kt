@@ -52,7 +52,7 @@ data class CharacterDetailUi(
     private val species: String,
     private val gender: String,
     private val location: String,
-    private val episodes: List<Episode>//todo
+    private val episodes: List<Episode>
 ) {
     @ExperimentalSharedTransitionApi
     @OptIn(ExperimentalFoundationApi::class)
@@ -180,10 +180,16 @@ private fun PairInfo(
 ) {
     Row(modifier, verticalAlignment = Alignment.CenterVertically) {
         Text(
-            text = "$title : ", modifier = modifier, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Medium
+            text = "$title : ",
+            modifier = modifier,
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Medium
         )
         Text(
-            text = value, modifier = modifier, style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Light
+            text = value,
+            modifier = modifier,
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Light
         )
     }
 }

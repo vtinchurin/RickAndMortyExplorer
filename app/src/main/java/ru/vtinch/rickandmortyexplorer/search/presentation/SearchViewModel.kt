@@ -14,11 +14,8 @@ class SearchViewModel(
     private val characterRepository: SearchCharacter,
     runAsync: RunAsync = RunAsync.Search(),
     private val mapper: Character.Mapper<CharacterUi>,
-    private val handleError: HandleError<DomainException, SearchScreenState>,
+    private val handleError: HandleError<SearchScreenState>,
 ) : MyViewModel.Abstract(runAsync) {
-
-//    private val _stateFlow  = MutableStateFlow<UiState>(UiState.Loading)
-//    val stateFlow get() = _stateFlow.asStateFlow()
 
     var innerState by mutableStateOf<SearchScreenState>(SearchScreenState.Initial)
         private set

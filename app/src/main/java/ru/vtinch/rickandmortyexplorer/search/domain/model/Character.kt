@@ -11,6 +11,6 @@ data class Character(
         mapper.map(id, name, imageUrl, status, species)
 
     interface Mapper<T : Any> {
-        fun map(id:Int, name: String, imageUrl: String, status: String, species: String): T
+        fun map(id: Int, name: String, imageUrl: String, status: String, species: String): T
     }
 }
