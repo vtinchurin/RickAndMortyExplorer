@@ -65,7 +65,7 @@ object SearchScreen : Route {
             SearchView(textState) {
                 viewModel.search(it.text)
             }
-            viewModel.innerState.Render(modifier = Modifier
+            viewModel.screenState.Render(modifier = Modifier
                 .fillMaxSize()
                 .padding(8.dp),
                 shareTransitionScope = shareTransitionScope,
