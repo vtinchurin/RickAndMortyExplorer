@@ -1,5 +1,7 @@
 package ru.vtinch.rickandmortyexplorer.search.data.cloud
 
+import android.util.Log
+
 interface CloudDataSource {
 
     suspend fun fetch(query: String): List<CharacterDto>
@@ -19,7 +21,7 @@ interface CloudDataSource {
                 val body = result.body()!!
                 return body.characters
             } else {
-                throw IllegalStateException((result.errorBody().toString()))
+                throw IllegalStateException(result.errorBody()?.string())
             }
         }
 
@@ -27,14 +29,14 @@ interface CloudDataSource {
             val result = service.getCharacterById(id).execute()
             if (result.isSuccessful) {
                 return result.body()!!
-            } else throw IllegalStateException((result.errorBody().toString()))
+            } else throw IllegalStateException(result.errorBody()?.string())
         }
 
         override suspend fun getEpisodes(episodes: List<Int>): ArrayList<Episode> {
             val result = service.getEpisodes(episodes).execute()
             if (result.isSuccessful) {
                 return result.body()!!
-            } else throw IllegalStateException((result.errorBody().toString()))
+            } else throw IllegalStateException(result.errorBody()?.string())
         }
     }
 

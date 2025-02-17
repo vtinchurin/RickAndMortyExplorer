@@ -17,7 +17,7 @@ class SearchViewModel(
     private val handleError: HandleError<SearchScreenState>,
 ) : MyViewModel.Abstract(runAsync) {
 
-    var innerState by mutableStateOf<SearchScreenState>(SearchScreenState.Initial)
+    var screenState by mutableStateOf<SearchScreenState>(SearchScreenState.Initial)
         private set
 
     init {
@@ -28,30 +28,30 @@ class SearchViewModel(
         handleAsync({
             try {
                 characterRepository.getCharacterById(id)
-                innerState
+                screenState
             } catch (e: DomainException) {
                 handleError.handleError(e)
             }
         }) {
-            innerState = it
-            innerState.navigate(onSuccess)
+            screenState = it
+            screenState.navigate(onSuccess)
         }
     }
 
     fun search(query: String) {
-        innerState = innerState.updateState()
+        screenState = screenState.updateState()
         handleAsync({
             try {
                 val tmp = characterRepository.search(query)
                 val listOfCharacterUi = tmp.map { character ->
                     character.map(mapper)
                 }
-                innerState.updateState(listOfCharacterUi)
+                screenState.updateState(listOfCharacterUi)
             } catch (e: DomainException) {
                 handleError.handleError(e)
             }
         }) { newState ->
-            innerState = newState
+            screenState = newState
         }
     }
 
