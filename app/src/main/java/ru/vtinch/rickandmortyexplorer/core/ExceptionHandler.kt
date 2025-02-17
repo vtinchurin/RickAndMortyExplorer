@@ -9,9 +9,11 @@ interface HandleError<O : Any> {
 
     class OnData : HandleError<DomainException> {
         override fun handleError(e: Exception): DomainException {
-            throw if (e is IOException) DomainException.NoInternetConnection()
-            else DomainException.ServiceUnavailable()
-
+            throw when (e) {
+                is IOException -> DomainException.NoInternetConnection()
+                is IllegalStateException -> DomainException.NoData()
+                else -> DomainException.ServiceUnavailable()
+            }
         }
     }
 
@@ -29,5 +31,7 @@ sealed class DomainException : Exception() {
 
     data class ServiceUnavailable(override val message: String = "Service unavailable") :
         DomainException()
+
+    data class NoData(override val message: String = "There is nothing here") : DomainException()
 
 }
