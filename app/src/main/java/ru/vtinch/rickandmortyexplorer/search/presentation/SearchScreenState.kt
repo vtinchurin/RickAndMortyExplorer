@@ -1,10 +1,8 @@
 package ru.vtinch.rickandmortyexplorer.search.presentation
 
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,7 +16,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -61,10 +58,6 @@ interface SearchScreenState : SearchRender<CharacterUi> {
 
     data class Content(private val content: SnapshotStateList<CharacterUi>) : SearchScreenState {
 
-        init {
-            Log.d("tvn", "State Content created")
-        }
-
         constructor(content: List<CharacterUi>) : this(SnapshotStateList<CharacterUi>()) {
             this.content.update(content)
         }
@@ -76,7 +69,6 @@ interface SearchScreenState : SearchRender<CharacterUi> {
         }
 
 
-        @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
         @Composable
         override fun Render(
             modifier: Modifier,
@@ -136,6 +128,7 @@ interface SearchScreenState : SearchRender<CharacterUi> {
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.error
                     )
+                    Spacer(Modifier.height(16.dp))
                     Button(
                         onClick = onRetry,
                         modifier = Modifier,
